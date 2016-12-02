@@ -1,6 +1,6 @@
 # このプラグインは
 
-Movable Typeのテンプレートで、JSONなどの構造体フォーマットを出力する処理をサポートします。
+Movable Typeのテンプレートで、JSONなどの構造体フォーマットを出力する処理をサポートします。親子構造を持ち、ネストした構造データをテンプレートでスマートに記述することができます。
 
 MITライセンスで提供します。
 
@@ -36,6 +36,12 @@ MITライセンスで提供します。
 * `json` JSON形式
 * `yaml` YAML形式
 
+`json`を選択した場合は、改行やインデントを付加する`pretty`やUTF-8として出力を行う`utf8`も合わせて指定することができます。
+
+    <mtsf:Hash format="json","pretty","utf8">
+      ...
+    </mtsf:Hash>
+
 ## `mtsf:Hash` (または `mtsf:Object`) ブロックタグ
 
 ハッシュ形式の値を作成します。
@@ -46,9 +52,15 @@ MITライセンスで提供します。
 
 ## `mtsf:Value` (または `mtsf:Scalar`) ブロックタグ
 
-テンプレート内部の値を変数に格納します。
+内部のテンプレートが出力するテキストを変数に格納します。
 
 `mtsf:Hash`や`mtsf:Array`が親要素にある場合は、その子要素に追加されます。
+
+### 値がJSONやYAML形式の場合
+
+`mtsf:Value`の内部がすでにJSONやYAMLのデータである場合、それを構造データとして解析した上で変数に格納することができます。
+
+    <mtsf:Value set_as="var1","json"><mt:var name="SOME_JSON_DATA"></mtsf:Value>
 
 ## `mtsf:Var`
 
