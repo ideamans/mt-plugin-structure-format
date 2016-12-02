@@ -2,6 +2,8 @@
 
 Movable Typeのテンプレートで、JSONなどの構造体フォーマットを出力する処理をサポートします。
 
+MITライセンスで提供します。
+
 # 使い方
 
     <mtsf:Hash format="json">
