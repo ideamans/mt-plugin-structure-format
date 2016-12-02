@@ -1,0 +1,28 @@
+id: StructureFormat
+name: StructureFormat
+version: 0.5.0
+l10n_class: MT::StructureFormat::L10N
+
+system_config:
+    DefaultStructureFormat:
+        Default: json
+
+tags:
+    block:
+        "sf:Object": $StructureFormat::MT::StructureFormat::Tags::tag_Object
+        "sf:Hash": $StructureFormat::MT::StructureFormat::Tags::tag_Object
+        "sf:Array": $StructureFormat::MT::StructureFormat::Tags::tag_Array
+        "sf:Value": $StructureFormat::MT::StructureFormat::Tags::tag_Value
+        "sf:Scalar": $StructureFormat::MT::StructureFormat::Tags::tag_Value
+    function:
+        "sf:Var": $StructureFormat::MT::StructureFormat::Tags::tag_Var
+    modifier:
+        set_as: $StructureFormat::MT::StructureFormat::Tags::modifier_set_as
+
+structure_formats:
+    json:
+        dump: $StructureFormat::MT::StructureFormat::Format::dump_json
+        load: $StructureFormat::MT::StructureFormat::Format::load_json
+    yaml:
+        dump: $StructureFormat::MT::StructureFormat::Format::dump_yaml
+        load: $StructureFormat::MT::StructureFormat::Format::load_yaml
