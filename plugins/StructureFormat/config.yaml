@@ -26,3 +26,5 @@ structure_formats:
     yaml:
         dump: $StructureFormat::MT::StructureFormat::Format::dump_yaml
         load: $StructureFormat::MT::StructureFormat::Format::load_yaml
+    tags:
+        load: $StructureFormat::MT::StructureFormat::Format::load_tags

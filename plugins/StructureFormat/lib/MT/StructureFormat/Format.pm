@@ -35,4 +35,10 @@ sub load_yaml {
     MT::Util::YAML::Load($value);
 }
 
+sub load_tags {
+    my ( $value, $args ) = @_;
+    my @tags = grep { defined($_) && $_ ne '' } map { s/^\s+|\s+$//g; $_ } split(/[\n,]/s, $value);
+    \@tags;
+}
+
 1;
