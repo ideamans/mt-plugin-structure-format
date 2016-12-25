@@ -217,6 +217,26 @@ EXPECT
     );
 }
 
+sub test_tags {
+    assert_template(
+        vars => {
+            tags => <<"TAGS"
+tag1,tag2
+tag3 includes space
+
+tag4,  tag5  , tag6
+TAGS
+        },
+        template => <<"EOT",
+<mt:var name="tags" set_as="data","tags" setvar="null">
+<mtsf:Var name="data" format="json">
+EOT
+        expect => <<"EXPECT",
+["tag1","tag2","tag3 includes space","tag4","tag5","tag6"]
+EXPECT
+    );
+}
+
 sub main {
     my $mt = MT->instance;
     my $class = shift;
