@@ -74,6 +74,9 @@ sub post_tag {
         || return;
 
     my $as = delete $args->{set_as};
+    if ( ref $value eq '' && !$args->{raw} ) {
+        $value =~ s!^\s+|\s+$!!g;
+    }
     defined ( set_as($ctx, $current, $value, $as) )
         || return;
 

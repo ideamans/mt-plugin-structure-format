@@ -237,6 +237,24 @@ EXPECT
     );
 }
 
+sub test_raw_and_trim {
+    assert_template(
+        template => <<"EOT",
+<mtsf:Object format="json">
+<mtsf:Value set_as="trim">
+trimmed
+</mtsf:Value>
+<mtsf:Value set_as="raw" raw="1">
+raw
+</mtsf:Value>
+</mtsf:Object>
+EOT
+        expect => <<'EXPECT',
+{"trim":"trimmed","raw":"\nraw\n"}
+EXPECT
+    );
+}
+
 sub main {
     my $mt = MT->instance;
     my $class = shift;
