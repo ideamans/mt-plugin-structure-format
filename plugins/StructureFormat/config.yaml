@@ -1,6 +1,6 @@
 id: StructureFormat
 name: StructureFormat
-version: 0.6.1
+version: 0.7.0
 l10n_class: MT::StructureFormat::L10N
 
 system_config:
