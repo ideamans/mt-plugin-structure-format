@@ -119,6 +119,51 @@ sub tag_Var {
     post_tag($value, $current, @_);
 }
 
+sub tag_BulkTags {
+    my ( $ctx, $args ) = @_;
+
+    my $current = $ctx->{__stash}->{sf_current};
+
+    my $special_args = {};
+    foreach my $key ( keys %$args ) {
+        if ( $key =~ /^:(.+)$/ ) {
+            $special_args->{$1} = delete $args->{$key};
+        }
+    }
+
+    my $prefix = $special_args->{prefix} || '';
+    my $suffix = $special_args->{suffix} || '';
+
+    my %tags;
+    my %tag_args;
+    foreach ( keys %$args ) {
+        my $value = $args->{$_};
+        my ( $as, $arg ) = split(/:/, $_, 2);
+        if ( defined($arg) ) {
+            $tag_args{$as} ||= {};
+            $tag_args{$as}->{$arg} = $value;
+        } elsif ( ref $value eq '' && $value ne '' ) {
+            $tags{$as} = $value;
+        }
+    }
+
+    foreach my $as ( keys %tags ) {
+        my $tag = $args->{$as};
+        my $tag_arg = $tag_args{$as} || {};
+
+        $tag =~ s/^MT:?//i;
+        $tag = "$prefix$tag$suffix";
+
+        local $ctx->{'__stash'}{'tokens_else'} = undef;
+        local $ctx->{_errstr} = undef;
+        my $value = $ctx->tag( $tag, $tag_arg );
+
+        set_as($ctx, $current, $value, $as);
+    }
+
+    '';
+}
+
 sub modifier_set_as {
     my ( $text, $arg, $ctx ) = @_;
 

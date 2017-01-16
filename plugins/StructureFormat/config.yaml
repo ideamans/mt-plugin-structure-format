@@ -1,6 +1,6 @@
 id: StructureFormat
 name: StructureFormat
-version: 0.6.1
+version: 0.7.0
 l10n_class: MT::StructureFormat::L10N
 
 system_config:
@@ -16,6 +16,7 @@ tags:
         "sf:Scalar": $StructureFormat::MT::StructureFormat::Tags::tag_Value
     function:
         "sf:Var": $StructureFormat::MT::StructureFormat::Tags::tag_Var
+        "sf:BulkTags": $StructureFormat::MT::StructureFormat::Tags::tag_BulkTags
     modifier:
         set_as: $StructureFormat::MT::StructureFormat::Tags::modifier_set_as
 

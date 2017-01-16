@@ -9,6 +9,7 @@ use lib ("lib", "extlib");
 use Test::More;
 
 use MT;
+use MT::Util;
 use base qw( MT::Tool );
 use Data::Dumper;
 use Data::Dump::Color;
@@ -251,6 +252,26 @@ raw
 EOT
         expect => <<'EXPECT',
 {"trim":"trimmed","raw":"\nraw\n"}
+EXPECT
+    );
+}
+
+sub test_bulk_tags {
+    assert_template(
+        vars => {
+            a => 1,
+            b => 2,
+        },
+        template => <<"EOT",
+<mtsf:Object format="json">
+    <mtsf:BulkTags :suffix="ar"
+        A="v" A:name="a"
+        B="v" B:name="b"
+    />
+</mtsf:Object>
+EOT
+        expect => <<'EXPECT',
+{"a":"1","b":"2"}
 EXPECT
     );
 }
